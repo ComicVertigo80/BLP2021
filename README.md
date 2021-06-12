@@ -2,4 +2,4 @@
 
 Main Website file: "Main_Page_BLP_Class_Hunt.html"
 
-Puzzel Interface: xx.html
+Puzzel Interface: PuzzelsDemo.html

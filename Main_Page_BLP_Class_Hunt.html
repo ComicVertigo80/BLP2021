@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+crossorigin=""/>
+
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
+
+
+<title>BLP '21</title>
+
+</head>
+
+
+<style>
+
+#mapid { 
+	height: 400px;
+	float: center;
+  margin: 40px;
+  padding: 40px;
+ }
+
+
+/*
+body {
+  background-image: url("https://wallpapercave.com/wp/wp6438544.jpg");
+}
+*/
+
+
+/* Interactive text */
+.wrapper {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome-message {
+  width: 31ch;
+  animation: typing 5s steps(38), blink .5s step-end infinite alternate;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid;
+  font-family: tahoma;
+  font-size: 2em;
+  color: blueviolet;
+}
+
+/* Interactive text continued*/
+@keyframes typing {
+  from {
+    width: 0
+  }
+}
+    
+@keyframes blink {
+  50% {
+    border-color: transparent
+  }
+}
+
+
+
+/* Upcoming Hunts Include table */
+table {
+	font-family: tahoma;
+	/* border-collapse: collapse; */
+	width: 100%;
+}
+
+td, th {
+	border:  2px solid slategrey;
+	text-align: center;
+	padding: 7px;
+  border-radius: 15px 15px 15px 15px;
+}
+
+tr:nth-child(even) {
+	background-color: #dddddd;
+  border-radius: 10px 40px 10px 40px;
+}
+
+
+
+h1 {
+	text-align: center;
+	color: whitesmoke;
+	font-family: tahoma;
+}
+
+
+h2 {
+	text-align: center;
+	color: orange;
+	font-family: tahoma;
+}
+
+
+h3 {
+	font-family: tahoma;
+	text-align: center;
+}
+
+p {
+	font-family: tahoma;
+}
+
+
+/* Handles Star colors and size */
+.fa {
+	font-size: 25px;
+}
+
+.checked {
+	color: orange;
+}
+
+
+
+.progress-bars {
+  font-family: tahoma;
+  font-style: italic;
+  padding: 4%;
+  margin: 4%;
+  color: slategrey;
+  border:  8px dashed #dddddd;
+}
+
+
+/* Col + Row for grid layout */
+
+.column {
+  float: left;
+  width: 33.33%;
+}
+
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+.center-image {
+	text-align: center;
+}
+
+
+
+/* Navigation Bar */
+
+.nav-bar {
+	background-color: slategrey;
+	overflow: hidden;
+	width: float;
+	font-size: 25px;
+	font-family: tahoma;
+	padding: 15px;
+  border-radius: 40px 10px 40px 10px;
+}
+
+.nav-bar a {
+	text-align: center;
+	color: whitesmoke;
+  border-radius: 40px 10px 40px 10px;
+}
+
+.nav-bar a:hover {
+	text-align: center;
+	color: royalblue;
+  border-radius: 40px 10px 40px 10px;
+}
+
+
+
+/* Header section - Open Hunts */
+.header {
+	background-color: blueviolet;
+	padding: 1px;
+	text-align: center;
+  border: 25px dashed whitesmoke;
+  border-radius: 10px 40px 10px 40px;
+
+}
+
+
+
+/* Middle sction - Local Business Participants */
+.middle {
+	background-color: grey;
+	padding: 1px;
+	text-align: center;
+}
+
+
+.divider {
+	background-color: slategrey;
+	padding: 10px;
+	text-align: center;
+  border-radius: 10px 40px 10px 40px;
+  border-style: dotted;
+}
+
+
+.divider2 {
+  background-color: slategrey;
+  padding: 10px;
+  text-align: center;
+  border-radius: 40px 10px 40px 10px;
+  border-style: dotted;
+}
+
+
+
+/* Footer section */
+.footer {
+	background-color: orange;
+	padding: 15px;
+	text-align: center;
+  border: 30px dashed whitesmoke;
+  border-radius: 10px 40px 10px 40px;
+}
+
+
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: whitesmoke;
+  text-align: left;
+  font-style: italic;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 2px 90px;
+  z-index: 1;
+}
+
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+
+
+/* Contact Form at bottom */
+.contact {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  font-family: tahoma;
+  border-radius: 10px 40px 10px 40px;
+}
+
+
+/* Arrow below interactive text */
+.arrowenter {
+	font-size: 400px;
+	color: blueviolet;
+	text-align: center;
+}
+
+
+/* Arrow below interactive text */
+.arrowenter-text {
+	text-align: center;
+	font-family: tahoma;
+	font-size: 100px;
+	color: blueviolet;
+}
+
+
+.middleitems {
+	text-align: center;
+}
+
+
+
+
+
+body {
+  background-image: url("notepad_3.jpeg");
+  padding-left: 59px;
+  padding-right: 59px;
+}
+
+/* Reff image:  https://www.deviantart.com/desertcactus/art/Pad-Paper-71224979 */
+
+
+input[type=text] {
+  width: 200px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-position: 10px 10px; 
+  margin-top: 10px;
+  padding: 5px 5px 5px 5px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+  width: 50%;
+}
+
+
+
+</style>
+
+
+<body>
+
+<div class="wrapper">
+    <div class="welcome-message">
+      Welcome to the hunt. Are you ready?
+    </div>
+</div>
+
+
+
+<div class="arrowenter">
+<p>&#x21e3;</p>
+</div>
+
+<div class="arrowenter-text">
+	<p>&#x2193; Keep scrolling &#x2193;</p>
+</div>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+<div class="nav-bar" style="text-align: center;">
+	<a href="#home"><i class="fa fa-fw fa-home"></i>Home</a>
+	<a href="#about"><i class="fa fa-fw fa-user"></i>About</a>
+	<a href="#contact"><i class="fa fa-fw fa-envelope"></i>Contact</a>
+	<a href="#past-hunt"><i class="fa fa-archive"></i>Archive</a>
+	<br>
+	<input type="text" placeholder="Search....">
+
+</div>
+
+<br>
+
+<div class="header">
+
+<h1>What are these Treasure Hunts <em>all about?</em></h1>
+</div>
+
+<p>Some fancy words about what this is all about with the help of Maple Pancake.</p>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nec ultrices dui sapien eget mi proin sed. Facilisi morbi tempus iaculis urna id volutpat lacus. Congue nisi vitae suscipit tellus. Amet risus nullam eget felis eget nunc lobortis. Senectus et netus et malesuada fames ac turpis. Velit scelerisque in dictum non consectetur a. Neque gravida in fermentum et sollicitudin ac. Interdum consectetur libero id faucibus nisl tincidunt eget nullam. Eget arcu dictum varius duis at consectetur lorem. Et egestas quis ipsum suspendisse. Ultrices mi tempus imperdiet nulla malesuada pellentesque. Ac tortor vitae purus faucibus. Sit amet purus gravida quis blandit turpis.
+<br>
+ </p>
+
+
+<br>
+
+<div class="wrapper">
+    <div class="welcome-message">
+      Ready to get started? Scroll down.
+    </div>
+</div>
+
+<br>
+
+
+<div class="header">
+<h1>Open Treasure Hunts</h1>
+</div>
+
+<br>
+
+<div class="row">
+  <div class="column">
+  	<div class="center-image">
+<h2>North County</h2>
+<img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Main_Street_North_Adams.jpg" width="200ptx" height="150ptx">
+<p>Here is a description of Maple Pancake. Rating 4.8 out of 5. </p>
+<h3> 4.8 </h3>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span>
+
+<br>
+
+<button>Start Hunt</button>
+
+<select id="dropdown" name="rating"
+            class="form-control" required>
+      <option disabled selected value>Continue Hunt</option>
+      <option value="Puzzel 1">Puzzel 1</option>
+      <option value="Puzzel 2">Puzzel 2</option>
+      <option value="Puzzel 3">Puzzel 3</option>
+      <option value="Puzzel 4">Puzzel 4</option>
+      <option value="Final Clue">Final Clue</option>
+      <option value="Virtual Hunts">Virtual Hunt Puzzel 1</option>
+      <option value="Virtual Hunts">Virtual Hunt Puzzel 2</option>
+      <option value="Virtual Hunts">Virtual Hunt Puzzel 3</option>
+      <option value="Virtual Hunts">Virtual Hunt Puzzel 4</option>
+      <option value="Virtual Hunts">Virtual Hunt Final Clue</option>
+    </select>
+  </div>
+
+
+
+</div>
+
+
+
+  <div class="column">
+  	<div class="center-image">
+<h2>Central County</h2>
+<img src="https://www.drugaddictionnow.com/wp-content/uploads/2018/04/Pittsfield-MA.jpg" width="200ptx" height="150ptx">
+<p>Here is a description of Maple Pancake. Rating 4.7 out of 5. </p>
+<h3> 4.7 </h3>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span>
+
+<br>
+
+<button>Start Hunt</button>
+
+<select id="dropdown" name="rating"
+            class="form-control" required>
+      <option disabled selected value>Continue Hunt</option>
+      <option value="Puzzel 1">Puzzel 1</option>
+      <option value="Puzzel 2">Puzzel 2</option>
+      <option value="Puzzel 3">Puzzel 3</option>
+      <option value="Puzzel 4">Puzzel 4</option>
+      <option value="Final Clue">Final Clue</option>
+      <option value="Virtual Hunts">Virtual Hunt Puzzel 1</option>
+      <option value="Virtual Hunts">Virtual Hunt Puzzel 2</option>
+      <option value="Virtual Hunts">Virtual Hunt Puzzel 3</option>
+      <option value="Virtual Hunts">Virtual Hunt Puzzel 4</option>
+      <option value="Virtual Hunts">Virtual Hunt Final Clue</option>
+    </select>
+  </div>
+</div>
+
+
+
+
+
+	<div class="column">
+		<div class="center-image">
+<h2>South County</h2>
+<img src="https://p.rdcpix.com/v04/l69691143-m0xd-w1020_h770_q80.jpg" width="200ptx" height="150ptx">
+<p>Here is a description of Maple Pancake. Rating 4.9 out of 5. </p>
+<h3> 4.9 </h3>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span>
+
+<br>
+
+<button>Start Hunt</button>
+
+<select id="dropdown" name="rating"
+            class="form-control" required>
+      <option disabled selected value>Continue Hunt</option>
+      <option value="Puzzel 1">Puzzel 1</option>
+      <option value="Puzzel 2">Puzzel 2</option>
+      <option value="Puzzel 3">Puzzel 3</option>
+      <option value="Puzzel 4">Puzzel 4</option>
+      <option value="Final Clue">Final Clue</option>
+      <option value="Virtual Hunts">Virtual Hunt Puzzel 1</option>
+      <option value="Virtual Hunts">Virtual Hunt Puzzel 2</option>
+      <option value="Virtual Hunts">Virtual Hunt Puzzel 3</option>
+      <option value="Virtual Hunts">Virtual Hunt Puzzel 4</option>
+      <option value="Virtual Hunts">Virtual Hunt Final Clue</option>
+    </select>
+  </div>
+</div>
+
+
+
+</div>
+
+
+<br>
+<br>
+
+
+<div class=divider>
+</div>
+
+
+
+
+<div class="middleitems">
+<h3>&#x2939; Where are you?</h3>
+
+<p>Click to get your coordinates. &#x2935;</p>
+
+<button onclick="getLocation()">Try It</button>
+
+<p id="location"></p>
+
+<div class="dropdown">
+  <span style="font-family: tahoma;">&#x2739;</span>
+  <div class="dropdown-content">
+  <p>You've found a clue, and all is well - now let's take a walk, along a nice trail</p>
+  </div>
+
+</div>
+</div>
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+<div class=divider>
+</div>
+
+
+
+<script>
+
+/* Arrow below interactive text */
+var x = document.getElementById("location");
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  x.innerHTML = "Latitude: " + position.coords.latitude + 
+  "<br>Longitude: " + position.coords.longitude;
+}
+</script>
+
+
+
+<div id="mapid">
+
+	<script>
+		/* Leaflet Map --> Personal Public Key being used*/
+
+		var mymap = L.map('mapid').setView([42.22331, -73.322374], 13);
+
+		L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox/streets-v11',
+    tileSize: 512,
+    zoomOffset: -1,
+    accessToken: 'pk.eyJ1IjoibmhhbGw4OTAiLCJhIjoiY2twb2h1ZG1nMXdlajJwb2c0Mm1sbTJkeSJ9.uuLKd_kUkR7IZJGemEp2cg'
+	}).addTo(mymap);
+
+
+     /* Side Adventure */
+
+    var popup = L.popup()
+    .setLatLng([42.33209624639382, -73.27560030153303])
+    .setContent("A place, a clue, a story")
+    .openOn(mymap);
+
+
+ /* 4 Brothers */
+     var marker = L.marker([42.21997863954798, -73.34532918107014]).addTo(mymap);
+
+
+/* Hotel on North */
+     var marker = L.marker([42.45338037566166, -73.25097979738142]).addTo(mymap);
+
+/* Tunnel City Coffee */
+     var marker = L.marker([42.709833617038946, -73.20466084416992]).addTo(mymap);
+
+/* Tunnel City Coffee */
+     var marker = L.marker([42.33209624639382, -73.27560030153303]).addTo(mymap);
+
+/* Bounti-Fare */
+     var marker = L.marker([42.655919, -73.109151]).addTo(mymap);
+
+
+    /* Side Adventure */
+
+    var circle = L.circle([42.227102, -73.291065], {
+    color: 'white',
+    fillColor: 'blue',
+    fillOpacity: 0.4,
+    radius: 800
+}).addTo(mymap);
+
+      var popup = L.popup()
+    .setLatLng([42.227102, -73.291065])
+    .setContent("Side Adventure")
+    .openOn(mymap);
+
+
+
+ var circle = L.circle([42.227102, -73.291065], {
+    color: 'white',
+    fillColor: 'purple',
+    fillOpacity: 0.4,
+    radius: 800
+}).addTo(mymap);
+
+
+
+var circle = L.circle([42.731357, -73.251324], {
+    color: 'white',
+    fillColor: 'purple',
+    fillOpacity: 0.4,
+    radius: 800
+}).addTo(mymap);
+
+
+
+var circle = L.circle([42.637068, -73.166616], {
+    color: 'white',
+    fillColor: 'purple',
+    fillOpacity: 0.4,
+    radius: 800
+}).addTo(mymap);
+
+
+
+var circle = L.circle([42.346285, -73.169046], {
+    color: 'white',
+    fillColor: 'purple',
+    fillOpacity: 0.4,
+    radius: 800
+}).addTo(mymap);
+
+
+    /* Find Location */
+
+    var popup = L.popup();
+
+    function onMapClick(e) {
+    popup
+        .setLatLng(e.latlng)
+        .setContent("Location Coordinates: " + e.latlng.toString())
+        .openOn(mymap);
+}
+    mymap.on('click', onMapClick);
+
+
+
+    
+
+
+	</script>
+</div>
+
+
+
+<br>
+<br>
+
+<div class=divider>
+</div>
+
+<div class="progress-bars">
+
+<label for="file">North County Hunts Completed: <strong>10%</strong> </label>
+<progress id="file" value="10" max="100"> 10% </progress>
+<br>
+<br>
+<label for="file">Central County Hunts Completed: <strong>68%</strong> </label>
+<progress id="file" value="68" max="100"> 68% </progress>
+<br>
+<br>
+<label for="file">South County Hunts Completed: <strong>32%</strong> </label>
+<progress id="file" value="32" max="100"> 32% </progress>
+</div>
+
+<br> 
+<br>
+
+
+</div>
+
+<div class="divider">
+</div>
+
+<br>
+<h1 style="color: black;">Local Treasures in the Berkshires</h1>
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+  <div class="column">
+    <div class="center-image">
+        <h2>La Fogatta</h2>
+          <img src="https://www.berkshirefinearts.com/uploadedImages/articles/2697_Fogata691747.jpg" width="200ptx" height="150ptx">
+<br>
+
+        <p style="font-style: center; font-size: 15px;">770 Tyler St Pittsfield, MA 01201</p>
+
+
+        <form action="https://www.yelp.com/biz/la-fogata-pittsfield-3">
+        <input type="submit" value="Menu" />
+        </form>
+
+        <div class="dropdown">
+        <span style="font-family: tahoma;">&#9432;</span>
+        <div class="dropdown-content">
+        <p>On Bus Route / Wheelchair accessible - drop down can be types of food offered?</p>
+        </div>
+      </div>
+
+        <select id="dropdown" name="rating"
+            class="form-control" required>
+        <option disabled selected value>Dietary Info</option>
+        <option value="Vegan">Vegan Options</option>
+        <option value="Vegan">Gluten Free Options</option>
+        </select>
+
+      </div>
+
+  </div>
+
+
+
+
+  <div class="column">
+    <div class="center-image">
+        <h2>Lee's Dynasty</h2>
+          <img src="https://media-cdn.tripadvisor.com/media/photo-s/18/e3/c4/3e/delicious-food-and-love.jpg" width="200ptx" height="150ptx">
+<br>
+
+        <p style="font-style: center; font-size: 15px;">131 Columbia St Adams, MA 01220</p>
+
+        <form action="https://www.yelp.com/biz/lees-dynasty-adams">
+        <input type="submit" value="Menu" />
+        </form>
+
+        <div class="dropdown">
+        <span style="font-family: tahoma;">&#9432;</span>
+        <div class="dropdown-content">
+        <p>On Bus Route / Wheelchair accessible - drop down can be types of food offered?</p>
+        </div>
+      </div>
+
+        <select id="dropdown" name="rating"
+            class="form-control" required>
+        <option disabled selected value>Dietary Info</option>
+        <option value="Vegan">Vegan Options</option>
+        <option value="Vegan">Gluten Free Options</option>
+        </select>
+
+      </div>
+
+  </div>
+
+
+
+
+  <div class="column">
+    <div class="center-image">
+        <h2>Dottie's Coffee Lounge</h2>
+          <img src="https://www.relishments.com/blog/wp-content/uploads/2016/01/20160109_085150.jpg" width="200ptx" height="150ptx">
+<br>
+
+        <p style="font-style: center; font-size: 15px;">444 North St Pittsfield, MA 01201</p>
+
+        <form action="http://www.dottiescoffeelounge.com/">
+        <input type="submit" value="Menu" />
+        </form>
+
+        <div class="dropdown">
+        <span style="font-family: tahoma;">&#9432;</span>
+        <div class="dropdown-content">
+        <p>On Bus Route / Wheelchair accessible - drop down can be types of food offered?</p>
+        </div>
+      </div>
+
+        <select id="dropdown" name="rating"
+            class="form-control" required>
+        <option disabled selected value>Dietary Info</option>
+        <option value="Vegan">Vegan Options</option>
+        <option value="Vegan">Gluten Free Options</option>
+        </select>
+
+      </div>
+
+  </div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<br>
+<br>
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+  <div class="column">
+    <div class="center-image">
+        <h2>Freight Yard Pub <br>& Restaurant</h2>
+          <img src="https://media-cdn.tripadvisor.com/media/photo-s/08/fd/56/27/freight-yard-restaurant.jpg" width="200ptx" height="150ptx">
+<br>
+
+        <p style="font-style: center; font-size: 15px;">1 Furnace St North Adams, MA 01247</p>
+
+        <form action="https://www.yelp.com/biz/la-fogata-pittsfield-3">
+        <input type="submit" value="Menu" />
+        </form>
+
+        <div class="dropdown">
+        <span style="font-family: tahoma;">&#9432;</span>
+        <div class="dropdown-content">
+        <p>On Bus Route / Wheelchair accessible - drop down can be types of food offered?</p>
+        </div>
+      </div>
+
+        <select id="dropdown" name="rating"
+            class="form-control" required>
+        <option disabled selected value>Dietary Info</option>
+        <option value="Vegan">Vegan Options</option>
+        <option value="Vegan">Gluten Free Options</option>
+        </select>
+
+      </div>
+
+  </div>
+
+
+
+
+  <div class="column">
+    <div class="center-image">
+        <h2>Coyote Flaco</h2>
+          <img src="https://westmorenews.com/Images/Images/57045.jpg" width="200ptx" height="150ptx">
+<br>
+
+        <p style="font-style: center; font-size: 15px;">505 Cold Spring Rd Williamstown, MA 0126</p>
+
+        <form action="https://www.yelp.com/biz/coyote-flaco-williamstown">
+        <input type="submit" value="Menu" />
+        </form>
+
+        <div class="dropdown">
+        <span style="font-family: tahoma;">&#9432;</span>
+        <div class="dropdown-content">
+        <p>On Bus Route / Wheelchair accessible - drop down can be types of food offered?</p>
+        </div>
+      </div>
+
+        <select id="dropdown" name="rating"
+            class="form-control" required>
+        <option disabled selected value>Dietary Info</option>
+        <option value="Vegan">Vegan Options</option>
+        <option value="Vegan">Gluten Free Options</option>
+        </select>
+
+      </div>
+
+  </div>
+
+
+
+
+  <div class="column">
+    <div class="center-image">
+        <h2>Mazzeo's Ristorante</h2>
+          <img src="https://media-cdn.tripadvisor.com/media/photo-s/0f/57/1f/b5/photo0jpg.jpg" width="200ptx" height="150ptx">
+<br>
+
+        <p style="font-style: center;font-size: 15px">1015 South St Pittsfield, MA 01201</p>
+
+        <form action="https://www.mazzeosristorante.com/">
+        <input type="submit" value="Menu" />
+        </form>
+
+        <div class="dropdown">
+        <span style="font-family: tahoma;">&#9432;</span>
+        <div class="dropdown-content">
+        <p>On Bus Route / Wheelchair accessible - drop down can be types of food offered?</p>
+        </div>
+      </div>
+
+        <select id="dropdown" name="rating"
+            class="form-control" required>
+        <option disabled selected value>Dietary Info</option>
+        <option value="Vegan">Vegan Options</option>
+        <option value="Vegan">Gluten Free Options</option>
+        </select>
+
+      </div>
+
+  </div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<br>
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+  <div class="column">
+    <div class="center-image">
+        <h2>Nara's Sushi</h2>
+          <img src="https://images.squarespace-cdn.com/content/v1/5b71945655b02c6b27345e36/1552499579073-DTX0PJ12UX87AIJHHTPZ/ke17ZwdGBToddI8pDm48kF8vdlmWgXzIqJctPN-PPs4UqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYxCRW4BPu10St3TBAUQYVKcQx431XYH6EBheB3hi1aUo5s6BtX4k-eOBnlOIs93D8QEcvF2wngcYb0AP-dWTVut/sushi+nara.jpg?format=2500w" width="200ptx" height="150ptx">
+<br>
+
+        <p style="font-style: center; font-size: 15px">139 Ashland St North Adams, MA 0124</p>
+
+        <form action="https://www.yelp.com/biz/nara-sushi-north-adams">
+        <input type="submit" value="Menu" />
+        </form>
+
+        <div class="dropdown">
+        <span style="font-family: tahoma;">&#9432;</span>
+        <div class="dropdown-content">
+        <p>On Bus Route / Wheelchair accessible - drop down can be types of food offered?</p>
+        </div>
+      </div>
+
+        <select id="dropdown" name="rating"
+            class="form-control" required>
+        <option disabled selected value>Dietary Info</option>
+        <option value="Vegan">Vegan Options</option>
+        <option value="Vegan">Gluten Free Options</option>
+        </select>
+
+      </div>
+
+  </div>
+
+
+
+
+  <div class="column">
+    <div class="center-image">
+        <h2>Prairie Whale</h2>
+          <img src="https://media-cdn.tripadvisor.com/media/photo-s/0b/44/b6/bf/great-atmosphere-drinks.jpg" width="200ptx" height="150ptx">
+<br>
+
+        <p style="font-style: center; font-size: 15px">178 Main St Great Barrington, MA 01230</p>
+
+        <form action="https://www.prairiewhale.com/">
+        <input type="submit" value="Menu" />
+        </form>
+
+        <div class="dropdown">
+        <span style="font-family: tahoma;">&#9432;</span>
+        <div class="dropdown-content">
+        <p>On Bus Route / Wheelchair accessible - drop down can be types of food offered?</p>
+        </div>
+      </div>
+
+        <select id="dropdown" name="rating"
+            class="form-control" required>
+        <option disabled selected value>Dietary Info</option>
+        <option value="Vegan">Vegan Options</option>
+        <option value="Vegan">Gluten Free Options</option>
+        </select>
+
+      </div>
+
+  </div>
+
+
+
+
+  <div class="column">
+    <div class="center-image">
+        <h2>Electra's Cafe</h2>
+          <img src="https://media-cdn.tripadvisor.com/media/photo-s/18/13/39/1a/photo0jpg.jpg" width="200ptx" height="150ptx">
+<br>
+
+        <p style="font-style: center; font-size: 15px">439 Pittsfield Rd Lenox, MA 01240</p>
+
+        <form action="https://www.yelp.com/biz/la-fogata-pittsfield-3">
+        <input type="submit" value="Menu" />
+        </form>
+
+        <div class="dropdown">
+        <span style="font-family: tahoma;">&#9432;</span>
+        <div class="dropdown-content">
+        <p>On Bus Route / Wheelchair accessible - drop down can be types of food offered?</p>
+        </div>
+      </div>
+
+        <select id="dropdown" name="rating"
+            class="form-control" required>
+        <option disabled selected value>Dietary Info</option>
+        <option value="Vegan">Vegan Options</option>
+        <option value="Vegan">Gluten Free Options</option>
+        </select>
+
+      </div>
+
+  </div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<br>
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+  <div class="column">
+    <div class="center-image">
+        <h2>SoCo Creamery</h2>
+          <img src="http://www.funinnewengland.com/mass/photos/ma_great_barrington_soco_creamery_0157.jpg" width="200ptx" height="150ptx">
+<br>
+
+        <p style="font-style: center; font-size: 15px">5 Railroad St Great Barrington, MA 01230</p>
+
+        <form action="https://www.sococreamery.com/">
+        <input type="submit" value="Menu" />
+        </form>
+
+        <div class="dropdown">
+        <span style="font-family: tahoma;">&#9432;</span>
+        <div class="dropdown-content">
+        <p>On Bus Route / Wheelchair accessible - drop down can be types of food offered?</p>
+        </div>
+      </div>
+
+        <select id="dropdown" name="rating"
+            class="form-control" required>
+        <option disabled selected value>Dietary Info</option>
+        <option value="Vegan">Vegan Options</option>
+        <option value="Vegan">Gluten Free Options</option>
+        </select>
+
+      </div>
+
+  </div>
+
+
+
+
+  <div class="column">
+    <div class="center-image">
+        <h2>Naji's Lebanese Restaurant</h2>
+          <img src="https://media-cdn.tripadvisor.com/media/photo-s/0d/1e/39/8f/photo2jpg.jpg" width="200ptx" height="150ptx">
+<br>
+
+        <p style="font-style: center; font-size: 15px">405 Stockbridge Rd Great Barrington, MA 01230</p>
+
+        <form action="https://www.najismediterraneancuisine.com/">
+        <input type="submit" value="Menu" />
+        </form>
+
+        <div class="dropdown">
+        <span style="font-family: tahoma;">&#9432;</span>
+        <div class="dropdown-content">
+        <p>&#x2714; On BRT Bus Route <br> <br> &#x2714; Wheelchair accessible</p>
+        </div>
+      </div>
+
+        <select id="dropdown" name="rating"
+            class="form-control" required>
+        <option disabled selected value>Dietary Info</option>
+        <option value="Vegan">Vegan Options</option>
+        <option value="Vegan">Gluten Free Options</option>
+        </select>
+
+      </div>
+
+  </div>
+
+
+
+
+  <div class="column">
+    <div class="center-image">
+        <h2>Smokey Divas</h2>
+          <img src="https://bloximages.newyork1.vip.townnews.com/berkshireeagle.com/content/tncms/assets/v3/editorial/1/5b/15bd825d-3400-5424-b9d9-e0960d7a682b/5f4ffdd1b42b8.image.jpg?resize=1396%2C931" width="200ptx" height="150ptx">
+<br>
+
+        <p style="font-style: center; font-size: 15px">239 Onota St Pittsfield, MA 01201</p>
+
+        <form action="https://www.92ndsauce.com/">
+        <input type="submit" value="Menu" />
+        </form>
+
+        <div class="dropdown">
+        <span style="font-family: tahoma;">&#9432;</span>
+        <div class="dropdown-content">
+        <p>On Bus Route / Wheelchair accessible - drop down can be types of food offered?</p>
+        </div>
+      </div>
+
+        <select id="dropdown" name="rating"
+            class="form-control" required>
+        <option disabled selected value>Dietary Info</option>
+        <option value="Vegan">Vegan Options</option>
+        <option value="Vegan">Gluten Free Options</option>
+        </select>
+
+      </div>
+
+  </div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<br>
+<br>
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+  <div class="column">
+    <div class="center-image">
+        <h2>Lucia's Latin Kitchen</h2>
+          <img src="https://cdn.usarestaurants.info/assets/uploads/0f71fcb5048e9d807cb853da06de0c9f_-united-states-massachusetts-berkshire-county-lee-lucias-latin-kitchen-413-394-5009htm.jpg" width="200ptx" height="150ptx">
+<br>
+
+        <p style="font-style: center; font-size: 15px">109 Railroad St Lee, MA 01238</p>
+
+        <form action="https://www.luciaslatinkitchen.com/">
+        <input type="submit" value="Menu" />
+        </form>
+
+        <div class="dropdown">
+        <span style="font-family: tahoma;">&#9432;</span>
+        <div class="dropdown-content">
+        <p>On Bus Route / Wheelchair accessible - drop down can be types of food offered?</p>
+        </div>
+      </div>
+
+        <select id="dropdown" name="rating"
+            class="form-control" required>
+        <option disabled selected value>Dietary Info</option>
+        <option value="Vegan">Vegan Options</option>
+        <option value="Vegan">Gluten Free Options</option>
+        </select>
+
+      </div>
+
+  </div>
+
+
+
+
+  <div class="column">
+    <div class="center-image">
+        <h2>House of India</h2>
+          <img src="https://bloximages.newyork1.vip.townnews.com/berkshireeagle.com/content/tncms/assets/v3/editorial/8/04/804411c0-b22b-5098-a009-bf2fd915cc65/5fa1695198b90.image.jpg?crop=1500%2C844%2C0%2C78&resize=1120%2C630&order=crop%2Cresize" width="200ptx" height="150ptx">
+<br>
+
+        <p style="font-style: center; font-size: 15px">261 North St Pittsfield, MA 01201</p>
+
+        <form action="https://www.yelp.com/biz/house-of-india-pittsfield">
+        <input type="submit" value="Menu" />
+        </form>
+
+        <div class="dropdown">
+        <span style="font-family: tahoma;">&#9432;</span>
+        <div class="dropdown-content">
+        <p>On Bus Route / Wheelchair accessible - drop down can be types of food offered?</p>
+        </div>
+      </div>
+
+        <select id="dropdown" name="rating"
+            class="form-control" required>
+        <option disabled selected value>Dietary Info</option>
+        <option value="Vegan">Vegan Options</option>
+        <option value="Vegan">Gluten Free Options</option>
+        </select>
+
+      </div>
+
+  </div>
+
+
+
+
+  <div class="column">
+    <div class="center-image">
+        <h2>Spice Root</h2>
+          <img src="https://media-cdn.tripadvisor.com/media/photo-s/0c/7b/28/5f/20160811-123311-largejpg.jpg" width="200ptx" height="150ptx">
+<br>
+
+        <p style="font-style: center; font-size: 15px">23 Spring St Williamstown, MA 01267</p>
+
+        <form action="https://www.spiceroot.com/">
+        <input type="submit" value="Menu" />
+        </form>
+
+        <div class="dropdown">
+        <span style="font-family: tahoma;">&#9432;</span>
+        <div class="dropdown-content">
+        <p>On Bus Route / Wheelchair accessible - drop down can be types of food offered?</p>
+        </div>
+      </div>
+
+        <select id="dropdown" name="rating"
+            class="form-control" required>
+        <option disabled selected value>Dietary Info</option>
+        <option value="Vegan">Vegan Options</option>
+        <option value="Vegan">Gluten Free Options</option>
+        </select>
+
+      </div>
+
+  </div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<br>
+<br>
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+  <div class="column">
+    <div class="center-image">
+        <h2>Thrive Diner</h2>
+          <img src="https://media-cdn.tripadvisor.com/media/photo-s/17/4a/1e/81/grilled-tofu-bowl.jpg" width="200ptx" height="150ptx">
+<br>
+
+        <p style="font-style: center; font-size: 15px">145 Wahconah St Pittsfield, MA 01201</p>
+
+        <form action="https://www.thrivediner.com/">
+        <input type="submit" value="Menu" />
+        </form>
+
+        <div class="dropdown">
+        <span style="font-family: tahoma;">&#9432;</span>
+        <div class="dropdown-content">
+        <p>On Bus Route / Wheelchair accessible - drop down can be types of food offered?</p>
+        </div>
+      </div>
+
+        <select id="dropdown" name="rating"
+            class="form-control" required>
+        <option disabled selected value>Dietary Info</option>
+        <option value="Vegan">Vegan Options</option>
+        <option value="Vegan">Gluten Free Options</option>
+        </select>
+
+      </div>
+
+  </div>
+
+
+
+
+  <div class="column">
+    <div class="center-image">
+        <h2>Bright Ideas Brewing</h2>
+          <img src="https://valleyadvocate.com/wp-content/uploads/2016/07/Photo-May-14-6-07-35-PM-1-1024x1024.jpg" width="200ptx" height="150ptx">
+<br>
+
+        <p style="font-style: center; font-size: 15px">111 Mass Moca Way North Adams, MA 01247</p>
+
+        <form action="https://www.brightideasbrewing.com/">
+        <input type="submit" value="Menu" />
+        </form>
+
+        <div class="dropdown">
+        <span style="font-family: tahoma;">&#9432;</span>
+        <div class="dropdown-content">
+        <p>On Bus Route / Wheelchair accessible - drop down can be types of food offered?</p>
+        </div>
+      </div>
+
+        <select id="dropdown" name="rating"
+            class="form-control" required>
+        <option disabled selected value>Dietary Info</option>
+        <option value="Vegan">Vegan Options</option>
+        <option value="Vegan">Gluten Free Options</option>
+        </select>
+
+      </div>
+
+  </div>
+
+
+
+
+  <div class="column">
+    <div class="center-image">
+        <h2>Grazie Italian Ristorante</h2>
+          <img src="https://resizer.otstatic.com/v2/photos/wide-huge/1/24398901.jpg" width="200ptx" height="150ptx">
+<br>
+
+        <p style="font-style: center; font-size: 15px">26 Marshall St North Adams, MA 01247</p>
+
+        <form action="https://www.graziena.com/">
+        <input type="submit" value="Menu" />
+        </form>
+
+        <div class="dropdown">
+        <span style="font-family: tahoma;">&#9432;</span>
+        <div class="dropdown-content">
+        <p>On Bus Route / Wheelchair accessible - drop down can be types of food offered?</p>
+        </div>
+      </div>
+
+        <select id="dropdown" name="rating"
+            class="form-control" required>
+        <option disabled selected value>Dietary Info</option>
+        <option value="Vegan">Vegan Options</option>
+        <option value="Vegan">Gluten Free Options</option>
+        </select>
+
+      </div>
+
+  </div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<br>
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+  <div class="column">
+    <div class="center-image">
+        <h2>Ye Olde Forge</h2>
+          <img src="https://media-cdn.tripadvisor.com/media/photo-s/0d/3e/fb/9a/outdoor-dining.jpg" width="200ptx" height="150ptx">
+<br>
+
+        <p style="font-style: center; font-size: 15px"> 125 N Main St, Lanesboro, MA 01237</p>
+
+        <form action="https://www.yeoldeforge.com/">
+        <input type="submit" value="Menu" />
+        </form>
+
+        <div class="dropdown">
+        <span style="font-family: tahoma;">&#9432;</span>
+        <div class="dropdown-content">
+        <p>On Bus Route / Wheelchair accessible - drop down can be types of food offered?</p>
+        </div>
+      </div>
+
+        <select id="dropdown" name="rating"
+            class="form-control" required>
+        <option disabled selected value>Dietary Info</option>
+        <option value="Vegan">Vegan Options</option>
+        <option value="Vegan">Gluten Free Options</option>
+        </select>
+
+      </div>
+
+  </div>
+
+
+
+
+  <div class="column">
+    <div class="center-image">
+        <h2>PUBLIC eat+drink</h2>
+          <img src="https://s3-media0.fl.yelpcdn.com/bphoto/FOgFfFYvwqrMijGYQNNnWQ/l.jpg" width="200ptx" height="150ptx">
+<br>
+
+        <p style="font-style: center; font-size: 15px">34 Holden St, North Adams, MA 01247</p>
+
+        <form action="https://publiceatanddrink.com/">
+        <input type="submit" value="Menu" />
+        </form>
+
+        <div class="dropdown">
+        <span style="font-family: tahoma;">&#9432;</span>
+        <div class="dropdown-content">
+        <p>On Bus Route / Wheelchair accessible - drop down can be types of food offered?</p>
+        </div>
+      </div>
+
+        <select id="dropdown" name="rating"
+            class="form-control" required>
+        <option disabled selected value>Dietary Info</option>
+        <option value="Vegan">Vegan Options</option>
+        <option value="Vegan">Gluten Free Options</option>
+        </select>
+
+      </div>
+
+  </div>
+
+
+
+
+  <div class="column">
+    <div class="center-image">
+        <h2>Bartlett's Orchard</h2>
+          <img src="https://static.wixstatic.com/media/deb256_b4b51299ea404294a6927ea78f4b9f74.jpg/v1/fit/w_2500,h_1330,al_c/deb256_b4b51299ea404294a6927ea78f4b9f74.jpg" width="200ptx" height="150ptx">
+<br>
+
+        <p style="font-style: center; font-size: 15px">575 Swamp Rd, Richmond, MA 01254</p>
+
+        <form action="https://www.bartlettsorchard.com/">
+        <input type="submit" value="Menu" />
+        </form>
+
+        <div class="dropdown">
+        <span style="font-family: tahoma;">&#9432;</span>
+        <div class="dropdown-content">
+        <p>On Bus Route / Wheelchair accessible - drop down can be types of food offered?</p>
+        </div>
+      </div>
+
+        <select id="dropdown" name="rating"
+            class="form-control" required>
+        <option disabled selected value>Dietary Info</option>
+        <option value="Vegan">Vegan Options</option>
+        <option value="Vegan">Gluten Free Options</option>
+        </select>
+
+      </div>
+
+  </div>
+
+
+
+</div>
+
+
+<br>
+<br>
+
+
+
+
+
+
+<br>
+<br>
+<br>
+
+
+<div class=divider2>
+</div>
+
+<br>
+<h2>Upcoming Treasure Hunts Include</h2>
+<br>
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Date Avaiable</th>
+		<th>Location</th>
+	</tr>
+	<tr>
+		<td>LooLoo Kazoo</td>
+		<td>4/5/2022</td>
+		<td>Pittsfield, MA</td>
+	</tr>
+	<tr>
+		<td>LooLoo Kazoo 2: Electric Boogaloo</td>
+		<td>4/5/2022</td>
+		<td>Adams, MA</td>
+	</tr>
+	<tr>
+		<td>LooLoo Kazoo 3: Revenge of the Sith </td>
+		<td>4/5/2022</td>
+		<td>Lenox, MA</td>
+	</tr>
+	<tr>
+		<td>LooLoo Kazoo 4: A New Hope</td>
+		<td>4/5/2022</td>
+		<td>Great Barrington, MA</td>
+	</tr>
+</table>
+
+<br>
+<br>
+<br>
+
+
+<div class=divider2>
+</div>
+
+
+<br>
+<br>
+
+<h3>Want to be notified of the next Treasure Hunt releases?</h3>
+
+<div class="contact">
+  <form action="/action_page.php">
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" placeholder="Name..">
+
+    <label for="email">Email</label>
+    <input type="text" id="email" name="email" placeholder="Email..">
+    <br>
+    <br>
+    <label for="foundus">How did you hear about us?</label>
+    <select id="foundus" name="foundus">
+      <option disabled selected value>Select One</option>
+      <option value="Email">Email</option>
+      <option value="Wordofmouth">Word of Mouth</option>
+      <option value="Socialmedia">Social Media</option>
+      <option value="In-Person">In Person Event</option>
+      <option value="Virtual">Virtual Event</option>
+      <option value="Other">Other</option>
+    </select>
+  
+    <input type="submit" value="Submit">
+  </form>
+</div>
+
+
+<br>
+
+
+<div class="wrapper">
+    <div class="welcome-message">
+      Hope you enojoyed the Hunts!
+    </div>
+</div>
+
+<br>
+
+
+<div class="footer">
+  <p>&#xbb; Created by the BLP Class of 2021 &#xab; &#xa9;</p>
+  <i class="fa fa-facebook-official"></i>
+  <i class="fa fa-instagram"></i>
+  <i class="fa fa-snapchat"></i>
+  <i class="fa fa-pinterest-p"></i>
+  <i class="fa fa-twitter"></i>
+  <i class="fa fa-linkedin"></i>
+  <p>Want to learn more about 1Berkshire? <a href="https://1berkshire.com/" target="_blank">Click Here</a></p>
+
+</div>
+
+
+
+
+</html>
+
+

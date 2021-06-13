@@ -6,7 +6,7 @@ var guessButton = document.getElementById("guessButton");
 var treasureMap = document.getElementById("treasuremap");
 
 /* Puzzle solution pool. */
-var puzzles = ["Chesterwood"];
+var puzzles = ["batman"];
 
 /* Entered content from user."
 var puzzle = "";
@@ -41,8 +41,8 @@ function init()
     }
 
     // Joins the answer with the random puzzle and displays the message let's play.
-    document.getElementById("answer").innerHTML= answers.join(" ");
-    document.getElementById("message").innerHTML= "LET'S PLAY!";
+    document.getElementById("answer").innerHTML = answers.join(" ");
+    document.getElementById("message").innerHTML = "LET'S PLAY!";
 }
 
 // Initializes the puzzle.
@@ -66,7 +66,6 @@ guessButton.addEventListener("click", function()
         if (puzzle.toLowerCase() === guess.toLowerCase()) 
         {
             // Set answer field equal to puzzle to maintain desired casing
-            answers = guess;
             for (var i = 0; i < puzzle.length; i++) 
              {
                  answers[i] = puzzle[i];
@@ -78,19 +77,6 @@ guessButton.addEventListener("click", function()
         {
              showThisMessage = "Nope, that isn't the correct answer!";
         }
-    }
-    else 
-    {
-        // If the guess is correct add it to the answer field(s) and display message
-        for (var i = 0; i < puzzle.length; i++) 
-        {
-            if (puzzle[i].toLowerCase() === guess.toLowerCase()) 
-            {
-                // Set answer field equal to puzzle to maintain desired casing
-                answers[i] = puzzle[i];
-                showThisMessage= "YES! Show us " + guess + ".";
-         }
-    }
 
         // To count remaining letters.
         var remainingLetters = 0;
@@ -107,12 +93,39 @@ guessButton.addEventListener("click", function()
             showThisMessage = "YES! You Solved the Puzzle!";
             revealMap = true;
         } 
-        //TODO BLP kludge because i dont get the math
-        if (answers === puzzle)
+
+        // Update parent HTML elements.
+        document.getElementById("answer").innerHTML = answers.join(" ");
+        document.getElementById("guess").innerHTML = showThisMessage;
+    }
+    else // Guess submitted for a single character.
+    {
+        // If the guess is correct add it to the answer field(s) and display message
+        for (var i = 0; i < puzzle.length; i++) 
+        {
+            if (puzzle[i].toLowerCase() === guess.toLowerCase()) 
+            {
+                // Set answer field equal to puzzle to maintain desired casing
+                answers[i] = puzzle[i];
+                showThisMessage= "YES! Show us " + guess + ".";
+            }
+        }
+
+        // To count remaining letters.
+        var remainingLetters = 0;
+        for (i = 0; i < puzzle.length; i++) 
+        {
+            if (answers[i] === '_')
+            {
+                remainingLetters += 1;
+            }
+        }
+        // if remaining letters in answer is zero the puzzle is solved        
+        if (remainingLetters == 0)
         {
             showThisMessage = "YES! You Solved the Puzzle!";
             revealMap = true;
-        }
+        } 
          // If incorrect guess display message and run next player function
         if (showThisMessage === "")
         {
@@ -124,6 +137,7 @@ guessButton.addEventListener("click", function()
         document.getElementById("guess").innerHTML = showThisMessage;
     }
     
-        document.getElementById("message").innerHTML = showThisMessage;
-        // TODO BLP somehow pass revealMap or use it back to home page to show map
+    // Refresh parent page.
+    document.getElementById("message").innerHTML = showThisMessage;
+    // TODO BLP somehow pass revealMap or use it back to home page to show map
 });

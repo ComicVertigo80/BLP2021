@@ -96,7 +96,8 @@ guessButton.addEventListener("click", function()
         var remainingLetters = 0;
         for (i = 0; i < puzzle.length; i++) 
         {
-            if (answers[i] === '_') {
+            if (answers[i] === '_')
+            {
                 remainingLetters += 1;
             }
         }

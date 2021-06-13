@@ -6,7 +6,7 @@ var guessButton = document.getElementById("guessButton");
 var treasureMap = document.getElementById("treasuremap");
 
 /* Puzzle solution pool. */
-var puzzles = ["batman"];
+var puzzles = ["Chesterwood"];
 
 /* Entered content from user."
 var puzzle = "";

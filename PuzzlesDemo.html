@@ -308,7 +308,54 @@ input[type=text]:focus {
 
 <p>put a puzzle here </p>
 
-<p> do something to get to the map page 'final clue' </p>
+<!-- Code adapted from https://github.com/jengleberg/project-1-wheel-of-fortune -->
+<!--- Header section with Wheel of Fortune logo -->    
+  <h1 class="header">
+<!--- Game container, master div --> 
+  <div class="game">
+       <!-- Guess area and puzzle board -->
+  <div class="board">
+    <div class="guessBoard"></div>
+    <div id="instructions" >TYPE YOUR LETTER AND PRESS GUESS</div>
+    <input id="guess" type="text">
+    <button type="button" id="guessButton">Guess</button>
+    <p class="answerBoard">
+      <font size="+3"><span id="answer">puzzle loading..</span></font>
+    </p>
+  </div>
+   <div id="players">
+    <!-- Message display area -->
+      <p id="message">&nbsp;</p>
+      <div class="playerBox">
+        <input id="p1name" class="nameInput" placeholder="Player 1 Name"></input>
+        <div id="p1score">0</div>
+        <div id="p1bank">0</div>
+      </div>
+      <div class="playerBox">
+        <input id="p2name" class="nameInput" placeholder="Player 2 Name"></input>
+        <div id="p2-score">0</div>
+        <div id="p2-bank">0</div>
+      </div>
+    </div>
+    <!-- Buttons to control spin, vowel, solve and new game -->
+   <div class="gameControls">
+     <button type="button" id="spin" >Spin Wheel</button>
+     <button id="vowel">Buy a Vowel</button>
+     <button id="solve">Solve Puzzle</button>
+     <button id="newGame">New Game</button>
+  </div>
+  </h1>
+
+
+
+  <!-- Players and score section -->
+   
+  </div>  
+<script src="wheel/scripts/js_two.js"></script>
+
+
+
+<p> TODO -  do something to get to the map page 'final clue' </p>
 
 <br>
 

@@ -1,11 +1,354 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Puzzles Demo</title>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+crossorigin=""/>
+
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
+
+
+<title>BLP '21 - Northern County Puzzle 1/4</title>
+
 </head>
+
+<style>
+/* Stole nicole's style, probably have some code in here that can get punted (shared .css file?)
+
+#mapid { 
+	height: 400px;
+	float: center;
+  margin: 40px;
+  padding: 40px;
+ }
+
+/* Interactive text */
+.wrapper {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome-message {
+  width: 31ch;
+  animation: typing 5s steps(38), blink .5s step-end infinite alternate;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid;
+  font-family: tahoma;
+  font-size: 2em;
+  color: blueviolet;
+}
+
+/* Interactive text continued*/
+@keyframes typing {
+  from {
+    width: 0
+  }
+}
+    
+@keyframes blink {
+  50% {
+    border-color: transparent
+  }
+}
+
+
+
+/* Upcoming Hunts Include table */
+table {
+	font-family: tahoma;
+	/* border-collapse: collapse; */
+	width: 100%;
+}
+
+td, th {
+	border:  2px solid slategrey;
+	text-align: center;
+	padding: 7px;
+  border-radius: 15px 15px 15px 15px;
+}
+
+tr:nth-child(even) {
+	background-color: #dddddd;
+  border-radius: 10px 40px 10px 40px;
+}
+
+
+
+h1 {
+	text-align: center;
+	color: whitesmoke;
+	font-family: tahoma;
+}
+
+
+h2 {
+	text-align: center;
+	color: orange;
+	font-family: tahoma;
+}
+
+
+h3 {
+	font-family: tahoma;
+	text-align: center;
+}
+
+p {
+	font-family: tahoma;
+}
+
+
+/* Handles Star colors and size */
+.fa {
+	font-size: 25px;
+}
+
+.checked {
+	color: orange;
+}
+
+
+
+.progress-bars {
+  font-family: tahoma;
+  font-style: italic;
+  padding: 4%;
+  margin: 4%;
+  color: slategrey;
+  border:  8px dashed #dddddd;
+}
+
+
+/* Col + Row for grid layout */
+
+.column {
+  float: left;
+  width: 33.33%;
+}
+
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+.center-image {
+	text-align: center;
+}
+
+
+
+/* Navigation Bar */
+
+.nav-bar {
+	background-color: slategrey;
+	overflow: hidden;
+	width: float;
+	font-size: 25px;
+	font-family: tahoma;
+	padding: 15px;
+  border-radius: 40px 10px 40px 10px;
+}
+
+.nav-bar a {
+	text-align: center;
+	color: whitesmoke;
+  border-radius: 40px 10px 40px 10px;
+}
+
+.nav-bar a:hover {
+	text-align: center;
+	color: royalblue;
+  border-radius: 40px 10px 40px 10px;
+}
+
+
+
+/* Header section - Open Hunts */
+.header {
+	background-color: blueviolet;
+	padding: 1px;
+	text-align: center;
+  border: 25px dashed whitesmoke;
+  border-radius: 10px 40px 10px 40px;
+
+}
+
+
+
+/* Middle sction - Local Business Participants */
+.middle {
+	background-color: grey;
+	padding: 1px;
+	text-align: center;
+}
+
+
+.divider {
+	background-color: slategrey;
+	padding: 10px;
+	text-align: center;
+  border-radius: 10px 40px 10px 40px;
+  border-style: dotted;
+}
+
+
+.divider2 {
+  background-color: slategrey;
+  padding: 10px;
+  text-align: center;
+  border-radius: 40px 10px 40px 10px;
+  border-style: dotted;
+}
+
+
+
+/* Footer section */
+.footer {
+	background-color: orange;
+	padding: 15px;
+	text-align: center;
+  border: 30px dashed whitesmoke;
+  border-radius: 10px 40px 10px 40px;
+}
+
+
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: whitesmoke;
+  text-align: left;
+  font-style: italic;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 2px 90px;
+  z-index: 1;
+}
+
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.middleitems {
+	text-align: center;
+}
+
+body {
+  background-image: url("notepad_3.jpeg");
+  padding-left: 59px;
+  padding-right: 59px;
+}
+
+/* Reff image:  https://www.deviantart.com/desertcactus/art/Pad-Paper-71224979 */
+
+
+input[type=text] {
+  width: 200px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-position: 10px 10px; 
+  margin-top: 10px;
+  padding: 5px 5px 5px 5px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+  width: 50%;
+}
+
+
+</style>
+
+
 <body>
 
-<h1>Words & Puzzles here!</h1>
+<div class="nav-bar" style="text-align: center;">
+	<a href="#home"><i class="fa fa-fw fa-home"></i>Home</a>
+	<a href="#about"><i class="fa fa-fw fa-user"></i>About</a>
+	<a href="#contact"><i class="fa fa-fw fa-envelope"></i>Contact</a>
+	<a href="#past-hunt"><i class="fa fa-archive"></i>Archive</a>
+	<br>
+	<input type="text" placeholder="Search....">
 
-</body>
+</div>
+
+<br>
+
+<div class="header">
+
+<h1>Northern Berkshires - Puzzle 1/4</h1>
+</div>
+
+<p>put a puzzle here </p>
+
+<br>
+
+<div class="divider">
+</div>
+
+<div class="progress-bars">
+
+<label for="file">North County Hunts Completed: <strong>10%</strong> </label>
+<progress id="file" value="10" max="100"> 10% </progress>
+<br>
+<br>
+<label for="file">Central County Hunts Completed: <strong>68%</strong> </label>
+<progress id="file" value="68" max="100"> 68% </progress>
+<br>
+<br>
+<label for="file">South County Hunts Completed: <strong>32%</strong> </label>
+<progress id="file" value="32" max="100"> 32% </progress>
+</div>
+
+<br> 
+<br>
+
+
+</div>
+
+<div class="divider">
+</div>
+
+
+<div class="footer">
+  <p>&#xbb; Created by the BLP Class of 2021 &#xab; &#xa9;</p>
+  <i class="fa fa-facebook-official"></i>
+  <i class="fa fa-instagram"></i>
+  <i class="fa fa-snapchat"></i>
+  <i class="fa fa-pinterest-p"></i>
+  <i class="fa fa-twitter"></i>
+  <i class="fa fa-linkedin"></i>
+  <p>Want to learn more about 1Berkshire? <a href="https://1berkshire.com/" target="_blank">Click Here</a></p>
+
+</div>
+
 </html>
+
+

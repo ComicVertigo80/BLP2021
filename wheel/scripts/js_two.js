@@ -111,8 +111,9 @@ guessButton.addEventListener("click", function()
                 answers[i] = puzzle[i];
                 showThisMessage= "YES! Show us " + guess + ".";
 
-                 // Refresh parent page. TODO
-                 document.getElementById("guesses").innerHTML = guess;
+                // Refresh guess board.
+                document.getElementById("guesses").innerHTML = document.getElementById("guesses").textContent 
+                   + "&nbsp;&nbsp;" + guess;
             }
         }
 
@@ -136,8 +137,9 @@ guessButton.addEventListener("click", function()
         {
             showThisMessage = "Sorry, try again!";
 
-             // Refresh parent page. TODO
-             document.getElementById("guesses").innerHTML = guess;
+             // Refresh guess board.
+             document.getElementById("guesses").innerHTML = document.getElementById("guesses").textContent 
+                + "&nbsp;&nbsp;" + guess;
         }
 
         // Update parent HTML elements.

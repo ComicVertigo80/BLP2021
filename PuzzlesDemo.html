@@ -306,40 +306,31 @@ input[type=text]:focus {
 <h1>Northern Berkshires - Puzzle 4/4</h1>
 </div>
 
-<p>put a puzzle here </p>
-
 <!-- Code adapted from https://github.com/jengleberg/project-1-wheel-of-fortune -->
-<!--- Header section with Wheel of Fortune logo -->    
-  <h1 class="header">
-<!--- Game container, master div --> 
-  <div class="game">
-       <!-- Guess area and puzzle board -->
-  <div class="board">
-    <div class="guessBoard">
-	<!-- TODO BLP show guessed letters and what's left -->
-	 </div>
-    <div id="instructions" >ENTER YOUR LETTER AND PRESS GUESS</div>
-    <input id="guess" type="text"> <!-- TODO BLP this shifts size when guess happens and its annoying -->
-    <button type="button" id="guessButton">Guess Letter</button>
-	<button type="button" id="solveButton">Solve Puzzle</button> <!-- TODO BLP figure out -->
-    <p class="answerBoard">
-      <font size="+3"><span id="answer">puzzle loading..</span></font>
-    </p>
-  </div>
-   <div id="players">
-    <!-- Message display area -->
-      <p id="message">&nbsp;</p>
-    </div>
-  </h1>
 
-  <!-- Players and score section -->
-   
+  <div class="game">
+    <h2 class="header"> 
+	  <div class="board">
+		<div class="guessBoard">
+		<!-- TODO BLP show guessed letters and what's left -->
+		 </div>
+		<div id="instructions" >Let's play! Guess a letter or the entire phrase!!</div>
+		<input id="guess" type="text"> <!-- TODO BLP this shifts size when guess happens and its annoying -->
+		<button type="button" id="guessButton">Guess Letter</button>
+		<button type="button" id="solveButton">Solve Puzzle</button> <!-- TODO BLP figure out -->
+		<p class="answerBoard">
+		  <font size="+3"><span id="answer">puzzle loading..</span></font>
+		</p>
+	  </div>
+	   <div id="players">
+		<!-- Message display area -->
+		  <p id="message">&nbsp;</p>
+		</div>
+	</h2>
   </div>  
 <script src="wheel/scripts/js_two.js"></script>
 
-
-
-<p> TODO -  do something to get to the map page 'final clue' </p>
+<p> TODO BLP - if we win, show da map </p>
 
 <br>
 

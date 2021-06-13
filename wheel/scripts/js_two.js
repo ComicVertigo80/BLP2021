@@ -4,7 +4,7 @@ var solvePuzzle = document.getElementById("solve");
 var guessButton = document.getElementById("guessButton");
 
 // Game Variables
-var puzzles = ["cccc"];
+var puzzles = ["chesterwood"];
 var puzzle = "";
 var answers = [];
 
@@ -43,7 +43,7 @@ guessButton.addEventListener("click", function() {
 	} else {
 // If the guess is correct add it to the answer field(s) and display message
 	for (var i = 0; i < puzzle.length; i++) {
-		if (puzzle[i] === guess) {
+		if (puzzle[i] === guess.toLowerCase()) {
 			answers[i] = guess;
 			showThisMessage= "YES! Show us " + guess + ".";
 		} 

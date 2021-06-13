@@ -76,6 +76,8 @@ guessButton.addEventListener("click", function()
         else
         {
              showThisMessage = "Nope, that isn't the correct answer!";
+             // Refresh parent page. TODO
+             document.getElementById("guesses").innerHTML = guess;
         }
 
         // To count remaining letters.
@@ -108,6 +110,9 @@ guessButton.addEventListener("click", function()
                 // Set answer field equal to puzzle to maintain desired casing
                 answers[i] = puzzle[i];
                 showThisMessage= "YES! Show us " + guess + ".";
+
+                 // Refresh parent page. TODO
+                 document.getElementById("guesses").innerHTML = guess;
             }
         }
 
@@ -130,6 +135,9 @@ guessButton.addEventListener("click", function()
         if (showThisMessage === "")
         {
             showThisMessage = "Sorry, try again!";
+
+             // Refresh parent page. TODO
+             document.getElementById("guesses").innerHTML = guess;
         }
 
         // Update parent HTML elements.

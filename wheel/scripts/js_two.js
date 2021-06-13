@@ -7,6 +7,7 @@ var guessButton = document.getElementById("guessButton");
 var puzzles = ["chesterwood"];
 var puzzle = "";
 var answers = [];
+var revealMap = false;
 
 // Function that initializes the game by randomly choosing a puzzle from the puzzles array
 function init() {
@@ -58,6 +59,7 @@ guessButton.addEventListener("click", function() {
 // if reamining letters in answer is zero the puzzle is solved		
 		if (remainingLetters == 0) {
 			showThisMessage = "YES! You Solved the Puzzle!";
+			revealMap = true;
 		} 
 // If incorrect guess display message and run next player function
 		if (showThisMessage === "") {
@@ -68,4 +70,5 @@ guessButton.addEventListener("click", function() {
 		document.getElementById("guess").innerHTML = showThisMessage;
 		}
 		document.getElementById("message").innerHTML = showThisMessage;
+		// TODO BLP somehow pass revealMap or use it back to home page to show map
 	});

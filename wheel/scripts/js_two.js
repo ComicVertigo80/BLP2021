@@ -6,7 +6,7 @@ var guessButton = document.getElementById("guessButton");
 var treasureMap = document.getElementById("treasuremap");
 
 // Game Variables
-var puzzles = ["bat man"];
+var puzzles = ["Chesterwood"];
 var puzzle = "";
 var answers = [];
 var revealMap = false;
@@ -58,9 +58,10 @@ guessButton.addEventListener("click", function() {
 // If the guess is correct add it to the answer field(s) and display message
 	for (var i = 0; i < puzzle.length; i++) 
 	{
-		if (puzzle[i] === guess.toLowerCase()) 
+		if (puzzle[i].toLowerCase() === guess.toLowerCase()) 
 		{
-			answers[i] = guess;
+			// Set answer field equal to puzzle to maintain desired casing
+			answers[i] = puzzle[i];
 			showThisMessage= "YES! Show us " + guess + ".";
 		} 
 	}

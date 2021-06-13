@@ -1,26 +1,36 @@
+/* Code adapted from https://github.com/jengleberg/project-1-wheel-of-fortune */
 
 // Selector Elements from HTML
 var solvePuzzle = document.getElementById("solve");
 var guessButton = document.getElementById("guessButton");
+var treasureMap = document.getElementById("treasuremap");
 
 // Game Variables
-var puzzles = ["chesterwood"];
+var puzzles = ["bat man"];
 var puzzle = "";
 var answers = [];
 var revealMap = false;
+var fullSolve = false;
 
 // Function that initializes the game by randomly choosing a puzzle from the puzzles array
 function init() {
-	puzzle = puzzles[Math.floor(Math.random() * puzzles.length)]; 
+    puzzle = puzzles[Math.floor(Math.random() * puzzles.length)]; 
 
-// Creates the blank lines for the letter guesses
-	answers = [];
-	for (var i = 0; i < puzzle.length; i++) {
-	answers[i] = "_";
-	// TODO BLP - add a space when its multiple words
-}
-// Joins the answer with the random puzzle and displays the message let's play
-	document.getElementById("answer").innerHTML= answers.join(" ");
+    // Creates the blank lines for the letter guesses
+    answers = [];
+    for (var i = 0; i < puzzle.length; i++)
+    {
+        answers[i] = "_";
+
+        // For multiple words, clear space blank
+        if(puzzle[i] == " ")
+        {
+            answers[i] = "&nbsp;";
+        }
+    }
+
+    // Joins the answer with the random puzzle and displays the message let's play
+    document.getElementById("answer").innerHTML= answers.join(" ");
     document.getElementById("message").innerHTML= "LET'S PLAY!";
 }
 
@@ -33,30 +43,35 @@ guessButton.addEventListener("click", function() {
 	var guess = document.getElementById("guess").value;
 	var showThisMessage = "";
 // If the guess button is clicked and nothing is in the input field display message	
-	if (guess.length === 0) {
+	if (guess.length === 0) 
+	{
 		showThisMessage = "Please enter a letter";
 		//TODO BLP - disable button guess if empty
 	}
 // If the guess button is clicked and there are two letters in the input field display message	
-	else if (guess.length !== 1) {
+	else if (guess.length !== 1) 
+	{
 		showThisMessage = "Please enter only a single letter";
 // Need to add logic for a non letter character and also to accept capital or lower case
 	} else {
 // If the guess is correct add it to the answer field(s) and display message
-	for (var i = 0; i < puzzle.length; i++) {
-		if (puzzle[i] === guess.toLowerCase()) {
+	for (var i = 0; i < puzzle.length; i++) 
+	{
+		if (puzzle[i] === guess.toLowerCase()) 
+		{
 			answers[i] = guess;
 			showThisMessage= "YES! Show us " + guess + ".";
 		} 
 	}
 // To count remaining letters.  Should have counted correct letters for multiplying prize if correct guess
 	var remainingLetters = 0;
-		for (i = 0; i < puzzle.length; i++) {
+		for (i = 0; i < puzzle.length; i++) 
+		{
 			if (answers[i] === '_') {
 				remainingLetters += 1;
 			}
 		}
-// if reamining letters in answer is zero the puzzle is solved		
+// if remaining letters in answer is zero the puzzle is solved		
 		if (remainingLetters == 0) {
 			showThisMessage = "YES! You Solved the Puzzle!";
 			revealMap = true;

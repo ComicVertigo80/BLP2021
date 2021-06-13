@@ -16,7 +16,7 @@ crossorigin=""/>
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
    crossorigin=""></script>
-
+   
 
 <title>BLP '21 - Northern County Puzzle 1/4</title>
 
@@ -318,9 +318,9 @@ p {text-align: center;}
 		<!-- TODO BLP show guessed letters and what's left -->
 		 </div>
 		<div id="instructions" >Let's play! Guess a letter or the entire phrase!!</div>
-		<input id="guess" type="textarea" /> <!-- TODO BLP this shifts size when guess happens and its annoying -->
+		<input id="guess" type="textField" />
 		
-		<button type="button" id="guessButton">Submit Guess</button>
+		<input type="button" id="guessButton" value="Submit Guess"/>
 		<p class="answerBoard">
 		  <font size="+3"><span id="answer">puzzle loading..</span></font>
 		</p>
@@ -334,8 +334,23 @@ p {text-align: center;}
   </div>  
 <script src="wheel/scripts/js_two.js"></script>
 
-
-
+<script src='http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js'></script>
+<script type="text/javascript">
+/* Jquery Disable Button if Textarea is empty */
+/* http://jsfiddle.net/atfh7Lov/4/ */
+$(document).ready(function() {
+  $('input[type="button"]').attr('disabled', true);
+  $('input[type="textField"],textarea').on('keyup', function() {
+    var textarea_value = $("#texta").val();
+    var text_value = $('input[name="textField"]').val();
+    if (textarea_value != '' && text_value != '') {
+      $('input[type="button"]').attr('disabled', false);
+    } else {
+      $('input[type="button"]').attr('disabled', true);
+    }
+  });
+});
+</script>
 
 <p> TODO BLP - if we win, show da map </p>
 
@@ -345,17 +360,16 @@ p {text-align: center;}
 </div>
 
 <div class="progress-bars">
-
-<label for="file">North County Hunts Completed: <strong>75%</strong> </label>
-<progress id="file" value="75" max="100"> 75% </progress>
-<br>
-<br>
-<label for="file">Central County Hunts Completed: <strong>68%</strong> </label>
-<progress id="file" value="68" max="100"> 68% </progress>
-<br>
-<br>
-<label for="file">South County Hunts Completed: <strong>32%</strong> </label>
-<progress id="file" value="32" max="100"> 32% </progress>
+    <label for="file">North County Hunts Completed: <strong>75%</strong> </label>
+    <progress id="file" value="75" max="100"> 75% </progress>
+    <br>
+    <br>
+    <label for="file">Central County Hunts Completed: <strong>68%</strong> </label>
+    <progress id="file" value="68" max="100"> 68% </progress>
+    <br>
+    <br>
+    <label for="file">South County Hunts Completed: <strong>32%</strong> </label>
+    <progress id="file" value="32" max="100"> 32% </progress>
 </div>
 
 <br> 

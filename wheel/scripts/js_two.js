@@ -57,8 +57,8 @@ guessButton.addEventListener("click", function()
     // Guess submitted with no content.
     if (guess.length === 0) 
     {
+		// HTML blocks this path :)
         showThisMessage = "Please enter a guess!";
-        //TODO BLP - disable button guess if empty
     }
     // Guess submitted for a solve.
     else if (guess.length !== 1) 

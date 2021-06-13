@@ -26,6 +26,7 @@ function init() {
         if(puzzle[i] == " ")
         {
             answers[i] = "&nbsp;";
+            // Don't need to track as win check looks for underscores
         }
     }
 

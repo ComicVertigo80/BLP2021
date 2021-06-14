@@ -172,6 +172,5 @@ guessButton.addEventListener("click", function()
       } else {
         x.style.visibility = "hidden";
       }
-} 
-
+    } 
 });

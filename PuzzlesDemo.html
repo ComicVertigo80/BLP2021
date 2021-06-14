@@ -17,7 +17,7 @@ crossorigin=""/>
    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
    crossorigin=""></script>
    
-<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>	
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>    
 
 
 <title>BLP '21 - Northern County Puzzle 4/4</title>
@@ -25,11 +25,10 @@ crossorigin=""/>
 </head>
 
 <style>
-/* Stole nicole's style, probably have some code in here that can get punted (shared .css file?)
 
 #mapid { 
-	height: 400px;
-	float: center;
+    height: 400px;
+    float: center;
   margin: 40px;
   padding: 40px;
  }
@@ -70,56 +69,56 @@ crossorigin=""/>
 
 /* Upcoming Hunts Include table */
 table {
-	font-family: tahoma;
-	/* border-collapse: collapse; */
-	width: 100%;
+    font-family: tahoma;
+    /* border-collapse: collapse; */
+    width: 100%;
 }
 
 td, th {
-	border:  2px solid slategrey;
-	text-align: center;
-	padding: 7px;
+    border:  2px solid slategrey;
+    text-align: center;
+    padding: 7px;
   border-radius: 15px 15px 15px 15px;
 }
 
 tr:nth-child(even) {
-	background-color: #dddddd;
+    background-color: #dddddd;
   border-radius: 10px 40px 10px 40px;
 }
 
 
 
 h1 {
-	text-align: center;
-	color: whitesmoke;
-	font-family: tahoma;
+    text-align: center;
+    color: whitesmoke;
+    font-family: tahoma;
 }
 
 
 h2 {
-	text-align: center;
-	color: orange;
-	font-family: tahoma;
+    text-align: center;
+    color: orange;
+    font-family: tahoma;
 }
 
 
 h3 {
-	font-family: tahoma;
-	text-align: center;
+    font-family: tahoma;
+    text-align: center;
 }
 
 p {
-	font-family: tahoma;
+    font-family: tahoma;
 }
 
 
 /* Handles Star colors and size */
 .fa {
-	font-size: 25px;
+    font-size: 25px;
 }
 
 .checked {
-	color: orange;
+    color: orange;
 }
 
 
@@ -150,7 +149,7 @@ p {
 
 
 .center-image {
-	text-align: center;
+    text-align: center;
 }
 
 
@@ -158,24 +157,24 @@ p {
 /* Navigation Bar */
 
 .nav-bar {
-	background-color: slategrey;
-	overflow: hidden;
-	width: float;
-	font-size: 25px;
-	font-family: tahoma;
-	padding: 15px;
+    background-color: slategrey;
+    overflow: hidden;
+    width: float;
+    font-size: 25px;
+    font-family: tahoma;
+    padding: 15px;
   border-radius: 40px 10px 40px 10px;
 }
 
 .nav-bar a {
-	text-align: center;
-	color: whitesmoke;
+    text-align: center;
+    color: whitesmoke;
   border-radius: 40px 10px 40px 10px;
 }
 
 .nav-bar a:hover {
-	text-align: center;
-	color: royalblue;
+    text-align: center;
+    color: royalblue;
   border-radius: 40px 10px 40px 10px;
 }
 
@@ -183,9 +182,9 @@ p {
 
 /* Header section - Open Hunts */
 .header {
-	background-color: blueviolet;
-	padding: 1px;
-	text-align: center;
+    background-color: blueviolet;
+    padding: 1px;
+    text-align: center;
   border: 25px dashed whitesmoke;
   border-radius: 10px 40px 10px 40px;
 
@@ -195,16 +194,16 @@ p {
 
 /* Middle sction - Local Business Participants */
 .middle {
-	background-color: grey;
-	padding: 1px;
-	text-align: center;
+    background-color: grey;
+    padding: 1px;
+    text-align: center;
 }
 
 
 .divider {
-	background-color: slategrey;
-	padding: 10px;
-	text-align: center;
+    background-color: slategrey;
+    padding: 10px;
+    text-align: center;
   border-radius: 10px 40px 10px 40px;
   border-style: dotted;
 }
@@ -222,9 +221,9 @@ p {
 
 /* Footer section */
 .footer {
-	background-color: orange;
-	padding: 15px;
-	text-align: center;
+    background-color: orange;
+    padding: 15px;
+    text-align: center;
   border: 30px dashed whitesmoke;
   border-radius: 10px 40px 10px 40px;
 }
@@ -255,7 +254,7 @@ p {
 }
 
 .middleitems {
-	text-align: center;
+    text-align: center;
 }
 
 body {
@@ -298,12 +297,12 @@ p {text-align: center;}
 <body>
 
 <div class="nav-bar" style="text-align: center;">
-	<a href="#home"><i class="fa fa-fw fa-home"></i>Home</a>
-	<a href="#about"><i class="fa fa-fw fa-user"></i>About</a>
-	<a href="#contact"><i class="fa fa-fw fa-envelope"></i>Contact</a>
-	<a href="#past-hunt"><i class="fa fa-archive"></i>Archive</a>
-	<br>
-	<input type="text" placeholder="Search....">
+    <a href="#home"><i class="fa fa-fw fa-home"></i>Home</a>
+    <a href="#about"><i class="fa fa-fw fa-user"></i>About</a>
+    <a href="#contact"><i class="fa fa-fw fa-envelope"></i>Contact</a>
+    <a href="#past-hunt"><i class="fa fa-archive"></i>Archive</a>
+    <br>
+    <input type="text" placeholder="Search....">
 
 </div>
 
@@ -320,33 +319,37 @@ p {text-align: center;}
 <p>Daniel Chester French was the sculptor in charge of the Abraham Lincoln Memorial, what estate did he own in Stockbridge?</p>
   <div class="game">
     <h2 class="header"> 
-	  <div class="board">
-		<div class="guessBoard">
-		<!-- TODO BLP show guessed letters and what's left -->
-		 </div>
-		<div id="instructions" >Let's play! Guess a letter or the entire phrase!!</div>
-		<input id="guess" type="textField" />
-		
-		<input type="button" id="guessButton" value="Submit Guess"/>
-		<p class="answerBoard">
-		  <font size="+3"><span id="answer">puzzle loading..</span></font>
-		</p>
-	  </div>
-	   <div id="players">
-		<!-- Message display area -->
-		  <p id="message">&nbsp;</p>
-		  Guesses: <p id="guesses">&nbsp;</p>
-		</div>
-		
-		<br/>
-		<!-- Map is hidden until puzzle is solved -->
-		<div id="treasureMap" style="width: 600px; height: 400px; margin:0 auto; visibility:hidden"></div>
-		<br/>
-		
-	</h2>	
+      <div class="board">
+
+        <div id="instructions" >Let's play! Guess a letter or the entire phrase!!</div>
+        <input id="guess" type="textField" />
+
+        <input type="button" id="guessButton" value="Submit Guess"/>
+        <p class="answerBoard">
+          <font size="+3"><span id="answer">puzzle loading..</span></font>
+        </p>
+
+      </div>
+
+       <div id="playerArea">
+        <!-- Message display area -->
+          <p id="message">&nbsp;</p>
+          Guesses: <p id="guesses">&nbsp;</p>
+        </div>
+        
+        <br/>
+
+        <!-- Map is hidden until puzzle is solved -->
+        <div id="treasureMap" style="width: 600px; height: 400px; margin:0 auto; visibility:hidden"></div>
+        <br/>
+        
+    </h2>    
   </div>  
+
+<!-- Script for puzzle -->
 <script src="wheel/scripts/js_two.js"></script>
 
+<!-- Script for button disabling, it does not work if you backspace / clear it -->
 <script src='http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js'></script>
 <script type="text/javascript">
 /* Jquery Disable Button if Textarea is empty */
@@ -364,26 +367,26 @@ $(document).ready(function() {
 });
 </script>
 
+<!-- Map -->
 <script>
-<!-- Setting up maps -->
-	var mymap = L.map('treasureMap').setView([42.2851256227235, -73.35229438844055], 15);
+    var mymap = L.map('treasureMap').setView([42.2851256227235, -73.35229438844055], 15);
 
-	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-		maxZoom: 18,
-		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-		id: 'mapbox/streets-v11',
-		tileSize: 512,
-		zoomOffset: -1
-	}).addTo(mymap);
-	
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+        maxZoom: 18,
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1
+    }).addTo(mymap);
+    
 <!-- Add pop-ups for the location -->
 <!-- https://gis.stackexchange.com/questions/265319/leaflet-popup-insert-image -->
 var cozImg = '<img src="leaflet/images/coz.jpg" height="208px" width="196px"/>';
 var tinyCozImg = '<img src="leaflet/images/coz_tiny.jpg" height="21px" width="20px"/>';
 
-	L.marker([42.2851256227235, -73.35229438844055]).addTo(mymap)
-		.bindPopup("<b>Scan the QR code here for the treasure!!</b><br/><br/>" + cozImg).openPopup();
+    L.marker([42.2851256227235, -73.35229438844055]).addTo(mymap)
+        .bindPopup("<b>Scan the QR code here for the treasure!!</b><br/><br/>" + cozImg).openPopup();
 </script>
 
 <br>
@@ -427,5 +430,3 @@ var tinyCozImg = '<img src="leaflet/images/coz_tiny.jpg" height="21px" width="20
 </div>
 
 </html>
-
-

@@ -17,7 +17,7 @@ var answers = [];
 /* Whether or not to reveal the map.*/
 var revealMap = false;
 
-/* Whether or not user has done full solve. TODO BLP may not need*/
+/* Whether or not user has done full solve.*/
 var fullSolve = false;
 
 // Function that initializes the game by randomly choosing a puzzle from the puzzles array.

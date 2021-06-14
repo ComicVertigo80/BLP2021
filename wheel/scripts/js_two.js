@@ -76,8 +76,10 @@ guessButton.addEventListener("click", function()
         else
         {
              showThisMessage = "Nope, that isn't the correct answer!";
-             // Refresh parent page. TODO
-             document.getElementById("guesses").innerHTML = guess;
+
+             // Refresh guess board.
+             document.getElementById("guesses").innerHTML = document.getElementById("guesses").textContent 
+               + "&nbsp;&nbsp;" + guess;
         }
 
         // To count remaining letters.
@@ -99,6 +101,12 @@ guessButton.addEventListener("click", function()
         // Update parent HTML elements.
         document.getElementById("answer").innerHTML = answers.join(" ");
         document.getElementById("guess").innerHTML = showThisMessage;
+
+        // Reveal the treasure!!
+        if(revealMap)
+        {
+           // document.getElementById("treasureMap").show();
+        }
     }
     else // Guess submitted for a single character.
     {
@@ -145,9 +153,17 @@ guessButton.addEventListener("click", function()
         // Update parent HTML elements.
         document.getElementById("answer").innerHTML = answers.join(" ");
         document.getElementById("guess").innerHTML = showThisMessage;
+
+        // Reveal the treasure!!
+        if(revealMap)
+        {
+           // document.getElementById("treasureMap").show();
+        }
     }
     
     // Refresh parent page.
     document.getElementById("message").innerHTML = showThisMessage;
+
+
     // TODO BLP somehow pass revealMap or use it back to home page to show map
 });

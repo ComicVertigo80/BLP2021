@@ -17,8 +17,10 @@ crossorigin=""/>
    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
    crossorigin=""></script>
    
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>	
 
-<title>BLP '21 - Northern County Puzzle 1/4</title>
+
+<title>BLP '21 - Northern County Puzzle 4/4</title>
 
 </head>
 
@@ -330,7 +332,13 @@ p {text-align: center;}
 		  <p id="message">&nbsp;</p>
 		  Guesses: <p id="guesses">&nbsp;</p>
 		</div>
-	</h2>
+		
+		<br/>
+		<!-- Map is hidden until puzzle is solved -->
+		<div id="treasureMap" style="width: 600px; height: 400px; margin:0 auto; display:none"></div>
+		<br/>
+		
+	</h2>	
   </div>  
 <script src="wheel/scripts/js_two.js"></script>
 
@@ -340,10 +348,9 @@ p {text-align: center;}
 /* http://jsfiddle.net/atfh7Lov/4/ */
 $(document).ready(function() {
   $('input[type="button"]').attr('disabled', true);
-  $('input[type="textField"],textarea').on('keyup', function() {
-    var textarea_value = $("#texta").val();
+  $('input[type="textField"]').on('keyup', function() {
     var text_value = $('input[name="textField"]').val();
-    if (textarea_value != '' && text_value != '') {
+    if (text_value != '') {
       $('input[type="button"]').attr('disabled', false);
     } else {
       $('input[type="button"]').attr('disabled', true);
@@ -352,7 +359,27 @@ $(document).ready(function() {
 });
 </script>
 
-<p> TODO BLP - if we win, show da map </p>
+<script>
+<!-- Setting up maps -->
+	var mymap = L.map('treasureMap').setView([42.2851256227235, -73.35229438844055], 15);
+
+	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+		maxZoom: 18,
+		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+		id: 'mapbox/streets-v11',
+		tileSize: 512,
+		zoomOffset: -1
+	}).addTo(mymap);
+	
+<!-- Add pop-ups for the location -->
+<!-- https://gis.stackexchange.com/questions/265319/leaflet-popup-insert-image -->
+var cozImg = '<img src="leaflet/images/coz.jpg" height="208px" width="196px"/>';
+var tinyCozImg = '<img src="leaflet/images/coz_tiny.jpg" height="21px" width="20px"/>';
+
+	L.marker([42.2851256227235, -73.35229438844055]).addTo(mymap)
+		.bindPopup("<b>Scan the QR code here for the treasure!!</b><br/><br/>" + cozImg).openPopup();
+</script>
 
 <br>
 

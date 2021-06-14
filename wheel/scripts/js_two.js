@@ -105,7 +105,7 @@ guessButton.addEventListener("click", function()
         // Reveal the treasure!!
         if(revealMap)
         {
-           // document.getElementById("treasureMap").show();
+            toggleVisibility();
         }
     }
     else // Guess submitted for a single character.
@@ -157,13 +157,21 @@ guessButton.addEventListener("click", function()
         // Reveal the treasure!!
         if(revealMap)
         {
-           // document.getElementById("treasureMap").show();
+            toggleVisibility();
         }
     }
     
     // Refresh parent page.
     document.getElementById("message").innerHTML = showThisMessage;
 
+    /* https://www.w3schools.com/howto/howto_js_toggle_hide_show.asp */
+    function toggleVisibility() {
+      var x = document.getElementById("treasureMap");
+      if (x.style.visibility === "hidden") {
+        x.style.visibility = "visible";
+      } else {
+        x.style.visibility = "hidden";
+      }
+} 
 
-    // TODO BLP somehow pass revealMap or use it back to home page to show map
 });

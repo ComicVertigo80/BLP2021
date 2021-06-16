@@ -435,13 +435,12 @@ input[type=text]:focus {
 <button>Start Hunt</button>
 
 <select id="dropdown" name="rating"
-            class="form-control" required
-			onchange="location = this.value;">
+            class="form-control" required>
       <option disabled selected value>Continue Hunt</option>
       <option value="Puzzle 1">Puzzle 1</option>
       <option value="Puzzle 2">Puzzle 2</option>
       <option value="Puzzle 3">Puzzle 3</option>
-      <option value="PuzzlesDemo.html">Puzzle 4</option>
+      <option value="Puzzle 4">Puzzle 4</option>
       <option value="Final Clue">Final Clue</option>
       <option value="Virtual Hunts">Virtual Hunt Puzzle 1</option>
       <option value="Virtual Hunts">Virtual Hunt Puzzle 2</option>
@@ -511,7 +510,7 @@ input[type=text]:focus {
 <button>Start Hunt</button>
 
 <select id="dropdown" name="rating"
-            class="form-control" required>
+            class="form-control" required onchange="location = this.value;">
       <option disabled selected value>Continue Hunt</option>
       <option value="Puzzle 1">Puzzle 1</option>
       <option value="Puzzle 2">Puzzle 2</option>
@@ -521,7 +520,7 @@ input[type=text]:focus {
       <option value="Virtual Hunts">Virtual Hunt Puzzle 1</option>
       <option value="Virtual Hunts">Virtual Hunt Puzzle 2</option>
       <option value="Virtual Hunts">Virtual Hunt Puzzle 3</option>
-      <option value="Virtual Hunts">Virtual Hunt Puzzle 4</option>
+      <option value="PuzzlesDemo.html">Virtual Hunt Puzzle 4</option>
       <option value="Virtual Hunts">Virtual Hunt Final Clue</option>
     </select>
   </div>
@@ -719,16 +718,16 @@ var circle = L.circle([42.346285, -73.169046], {
 
 <div class="progress-bars">
 
-<label for="file">North County Hunts Completed: <strong>100%</strong> </label>
-<progress id="file" value="100" max="100"> 10% </progress>
+<label for="file">North County Hunts Completed: <strong>42%</strong> </label>
+<progress id="file" value="42" max="100"></progress>
 <br>
 <br>
 <label for="file">Central County Hunts Completed: <strong>68%</strong> </label>
-<progress id="file" value="68" max="100"> 68% </progress>
+<progress id="file" value="68" max="100"></progress>
 <br>
 <br>
-<label for="file">South County Hunts Completed: <strong>32%</strong> </label>
-<progress id="file" value="32" max="100"> 32% </progress>
+<label for="file">South County Hunts Completed: <strong>100%</strong> </label>
+<progress id="file" value="100" max="100"></progress>
 </div>
 
 <br> 
